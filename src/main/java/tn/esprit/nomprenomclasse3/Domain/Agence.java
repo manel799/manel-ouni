@@ -1,0 +1,33 @@
+package tn.esprit.nomprenomclasse3.Domain;
+
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Agence {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long idAgence;
+    String nom;
+    String ville;
+    String adresse;
+    String telephone;
+
+    @OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    List<Employe> employes;
+
+    @OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    List<Vehicule> vehicules;
+}
